@@ -130,12 +130,6 @@
     line-height: 1;
   }
   .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 6px; font-weight: 400; }
-  .hero-photo {
-    width: 100%; border-radius: 18px; overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-    position: relative;
-  }
-  .hero-photo img { width: 100%; height: 340px; object-fit: cover; display: block; }
 
   /* SECTION COMMON */
   section { padding: 80px 40px; }
@@ -240,6 +234,75 @@
   .results .divider { background: var(--gold); }
   .results-img { width: 100%; border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
 
+  /* FOREIGN TRIPS */
+  .foreign-trips { background: var(--off-white); }
+  .trips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+  .trip-card {
+    background: var(--white); border-radius: 20px;
+    border: 1px solid var(--border); overflow: hidden;
+    transition: all 0.25s; box-shadow: var(--shadow);
+  }
+  .trip-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .trip-card-header {
+    background: linear-gradient(135deg, var(--maroon-dark) 0%, var(--maroon) 100%);
+    padding: 32px 30px 28px;
+    position: relative; overflow: hidden;
+  }
+  .trip-card-header::after {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 160px; height: 160px; border-radius: 50%;
+    background: rgba(201,168,76,0.12);
+    pointer-events: none;
+  }
+  .trip-flag { font-size: 40px; margin-bottom: 10px; display: block; }
+  .trip-university {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; font-weight: 700; color: var(--white);
+    line-height: 1.2; margin-bottom: 6px;
+  }
+  .trip-location { font-size: 13px; color: rgba(255,255,255,0.65); font-weight: 500; letter-spacing: 0.5px; }
+  .trip-card-body { padding: 28px 30px; }
+  .trip-purpose-tag {
+    display: inline-block; background: var(--maroon-pale); color: var(--maroon);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+    padding: 4px 12px; border-radius: 100px; margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .trip-desc {
+    font-size: 15px; color: var(--text-mid); line-height: 1.7; margin-bottom: 20px;
+  }
+  .trip-highlights { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .trip-highlights li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; color: var(--text-mid); line-height: 1.5;
+  }
+  .trip-highlights li::before {
+    content: '✦'; color: var(--gold); font-size: 11px; margin-top: 4px; flex-shrink: 0;
+  }
+  .trip-cta-bar {
+    margin-top: 24px; padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .trip-cta-label { font-size: 13px; color: var(--text-light); }
+  .trip-cta-btn {
+    background: var(--maroon); color: var(--white);
+    padding: 10px 20px; border-radius: 8px;
+    font-weight: 600; font-size: 13px; text-decoration: none;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .trip-cta-btn:hover { background: var(--maroon-dark); }
+  .trips-note {
+    margin-top: 40px; padding: 24px 28px;
+    background: linear-gradient(135deg, var(--maroon-pale), #fff7f9);
+    border: 1px solid rgba(128,0,32,0.12); border-radius: 14px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .trips-note-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .trips-note-text { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+  .trips-note-text strong { color: var(--maroon); }
+
   /* AWARDS */
   .awards { background: var(--white); }
   .awards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -279,10 +342,13 @@
   .blog-card {
     background: var(--off-white); border-radius: 14px;
     border: 1px solid var(--border); overflow: hidden;
-    transition: all 0.25s;
+    transition: all 0.25s; cursor: pointer;
   }
   .blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-  .blog-img { height: 160px; background: var(--maroon-pale); display: flex; align-items: center; justify-content: center; font-size: 48px; }
+  .blog-img {
+    height: 160px; background: var(--maroon-pale);
+    display: flex; align-items: center; justify-content: center; font-size: 48px;
+  }
   .blog-body { padding: 20px; }
   .blog-tag {
     display: inline-block; background: var(--maroon-pale); color: var(--maroon);
@@ -291,8 +357,21 @@
   }
   .blog-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; line-height: 1.3; }
   .blog-excerpt { font-size: 13px; color: var(--text-light); line-height: 1.6; }
-  .blog-link { display: inline-block; margin-top: 14px; color: var(--maroon); font-weight: 600; font-size: 13px; text-decoration: none; }
+  .blog-full {
+    display: none; font-size: 13px; color: var(--text-mid);
+    line-height: 1.7; margin-top: 12px; padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .blog-full p { margin-bottom: 10px; }
+  .blog-full p:last-child { margin-bottom: 0; }
+  .blog-link {
+    display: inline-block; margin-top: 14px; color: var(--maroon);
+    font-weight: 600; font-size: 13px; text-decoration: none;
+    background: none; border: none; cursor: pointer; padding: 0; font-family: inherit;
+  }
   .blog-link:hover { text-decoration: underline; }
+  .blog-card.expanded .blog-full { display: block; }
+  .blog-card.expanded .blog-link { color: var(--text-light); }
 
   /* REGISTER */
   .register { background: var(--maroon-dark); }
@@ -312,8 +391,7 @@
     width: 100%; border: 1.5px solid rgba(128,0,32,0.15); border-radius: 8px;
     padding: 11px 14px; font-size: 14px; font-family: inherit;
     color: var(--text-dark); background: var(--off-white);
-    transition: border-color 0.2s;
-    outline: none;
+    transition: border-color 0.2s; outline: none;
   }
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--maroon); background: var(--white); }
   .form-group textarea { resize: vertical; min-height: 80px; }
@@ -392,7 +470,7 @@
     .nav-links { display: none; }
     section { padding: 60px 20px; }
     .hero { padding: 60px 20px; }
-    .hero-inner, .about-grid, .register-grid { grid-template-columns: 1fr; gap: 36px; }
+    .hero-inner, .about-grid, .register-grid, .trips-grid { grid-template-columns: 1fr; gap: 36px; }
     .hero h1 { font-size: 36px; }
     .courses-grid, .awards-grid, .testimonials-grid, .blog-grid { grid-template-columns: 1fr 1fr; }
     .trust-inner { gap: 20px; }
@@ -403,6 +481,7 @@
     .courses-grid, .awards-grid, .testimonials-grid, .blog-grid { grid-template-columns: 1fr; }
     .hero-stat-num { font-size: 28px; }
     .section-title { font-size: 30px; }
+    .trips-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -418,6 +497,7 @@
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#courses">Courses</a>
+    <a href="#foreign-trips">Foreign Seminars</a>
     <a href="#awards">Awards</a>
     <a href="#testimonials">Reviews</a>
     <a href="#blog">Blog</a>
@@ -429,11 +509,11 @@
 <section id="home" class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-badge">🏆 IDP & British Council Recognized Institute</div>
+      <div class="hero-badge">IDP &amp; British Council Recognized Institute</div>
       <h1>Transform Your Communication Skills and Unlock <em>New Opportunities</em></h1>
-      <p>Learn Spoken English, Confidence Building, Public Speaking & Personality Development with Expert Guidance from 20+ years of proven teaching excellence.</p>
+      <p>Learn Spoken English, Confidence Building, Public Speaking &amp; Personality Development with Expert Guidance from 20+ years of proven teaching excellence.</p>
       <div class="hero-buttons">
-        <a href="#contact" class="btn-primary">📅 Book Free Demo Class</a>
+        <a href="#contact" class="btn-primary">Book Free Demo Class</a>
         <a href="#courses" class="btn-outline">View All Courses →</a>
       </div>
     </div>
@@ -473,11 +553,11 @@
     </div>
     <div class="trust-item">
       <span class="trust-icon">📍</span>
-      <span class="trust-text">Branches in <strong>Morinda & Sri Chamkaur Sahib</strong></span>
+      <span class="trust-text">Branches in <strong>Morinda &amp; Sri Chamkaur Sahib</strong></span>
     </div>
     <div class="trust-item">
       <span class="trust-icon">🌐</span>
-      <span class="trust-text"><strong>Online & Offline</strong> Coaching Available</span>
+      <span class="trust-text"><strong>Online &amp; Offline</strong> Coaching Available</span>
     </div>
     <div class="trust-item">
       <span class="trust-icon">🎓</span>
@@ -509,8 +589,9 @@
           <li>Personally taught and mentored over <strong>7000+ students</strong> across India and globally</li>
           <li>Recognized by IDP at the <strong>8th Annual Partners Recognition Meet</strong></li>
           <li>Awarded by British Council for <strong>Excellence Performance 2019-20</strong></li>
-          <li>Multiple branch network: <strong>Morinda, Sri Chamkaur Sahib</strong> & Online</li>
+          <li>Multiple branch network: <strong>Morinda, Sri Chamkaur Sahib</strong> &amp; Online</li>
           <li>PhD research in Sport Sciences – brings a scientific approach to learning</li>
+          <li>Represented Sky High Institute at public speaking seminars at the <strong>University of Toronto &amp; University of British Columbia, Canada</strong></li>
           <li>Services available <strong>in-person (Punjab)</strong> and <strong>online globally</strong></li>
         </ul>
       </div>
@@ -532,8 +613,8 @@
         <div class="course-title">Spoken English</div>
         <div class="course-desc">Build fluency, pronunciation, and natural conversational English for everyday life and professional settings.</div>
         <div class="course-meta">
-          <div class="course-meta-item">⏱ 4–8 Weeks</div>
-          <div class="course-meta-item">📍 Online & Offline</div>
+          <div class="course-meta-item">Duration: 4–8 Weeks</div>
+          <div class="course-meta-item">Mode: Online &amp; Offline</div>
           <div class="course-badge">Beginner Friendly</div>
         </div>
         <a href="#contact" class="course-cta">Enquire Now</a>
@@ -544,8 +625,8 @@
         <div class="course-title">Communication Skills</div>
         <div class="course-desc">Master verbal, non-verbal, and written communication for personal and professional excellence.</div>
         <div class="course-meta">
-          <div class="course-meta-item">⏱ 6 Weeks</div>
-          <div class="course-meta-item">📍 Online & Offline</div>
+          <div class="course-meta-item">Duration: 6 Weeks</div>
+          <div class="course-meta-item">Mode: Online &amp; Offline</div>
           <div class="course-badge">All Levels</div>
         </div>
         <a href="#contact" class="course-cta">Enquire Now</a>
@@ -556,8 +637,8 @@
         <div class="course-title">Interview Preparation</div>
         <div class="course-desc">Crack any interview — job, visa, or university admission — with confidence and structured preparation.</div>
         <div class="course-meta">
-          <div class="course-meta-item">⏱ 2–4 Weeks</div>
-          <div class="course-meta-item">📍 Online & Offline</div>
+          <div class="course-meta-item">Duration: 2–4 Weeks</div>
+          <div class="course-meta-item">Mode: Online &amp; Offline</div>
           <div class="course-badge">High Demand</div>
         </div>
         <a href="#contact" class="course-cta">Enquire Now</a>
@@ -568,8 +649,8 @@
         <div class="course-title">Public Speaking</div>
         <div class="course-desc">Overcome stage fear, speak with authority, and captivate any audience — from boardrooms to stages.</div>
         <div class="course-meta">
-          <div class="course-meta-item">⏱ 4 Weeks</div>
-          <div class="course-meta-item">📍 Online & Offline</div>
+          <div class="course-meta-item">Duration: 4 Weeks</div>
+          <div class="course-meta-item">Mode: Online &amp; Offline</div>
           <div class="course-badge">Popular</div>
         </div>
         <a href="#contact" class="course-cta">Enquire Now</a>
@@ -580,8 +661,8 @@
         <div class="course-title">Personality Development</div>
         <div class="course-desc">Transform your presence, confidence, body language, and social skills to stand out in every room.</div>
         <div class="course-meta">
-          <div class="course-meta-item">⏱ 6–8 Weeks</div>
-          <div class="course-meta-item">📍 Online & Offline</div>
+          <div class="course-meta-item">Duration: 6–8 Weeks</div>
+          <div class="course-meta-item">Mode: Online &amp; Offline</div>
           <div class="course-badge">Transformative</div>
         </div>
         <a href="#contact" class="course-cta">Enquire Now</a>
@@ -590,10 +671,10 @@
       <div class="course-card">
         <div class="course-icon">📝</div>
         <div class="course-title">IELTS Preparation</div>
-        <div class="course-desc">Achieve your target band score with expert coaching in Reading, Writing, Listening & Speaking.</div>
+        <div class="course-desc">Achieve your target band score with expert coaching in Reading, Writing, Listening &amp; Speaking.</div>
         <div class="course-meta">
-          <div class="course-meta-item">⏱ 8–12 Weeks</div>
-          <div class="course-meta-item">📍 Online & Offline</div>
+          <div class="course-meta-item">Duration: 8–12 Weeks</div>
+          <div class="course-meta-item">Mode: Online &amp; Offline</div>
           <div class="course-badge">IDP Certified</div>
         </div>
         <a href="#contact" class="course-cta">Enquire Now</a>
@@ -604,8 +685,8 @@
         <div class="course-title">Group Discussion Training</div>
         <div class="course-desc">Learn the art of structured debate, active listening, and persuasive participation in group settings.</div>
         <div class="course-meta">
-          <div class="course-meta-item">⏱ 2–3 Weeks</div>
-          <div class="course-meta-item">📍 Offline</div>
+          <div class="course-meta-item">Duration: 2–3 Weeks</div>
+          <div class="course-meta-item">Mode: Offline</div>
           <div class="course-badge">Interactive</div>
         </div>
         <a href="#contact" class="course-cta">Enquire Now</a>
@@ -616,8 +697,8 @@
         <div class="course-title">Soft Skills for Professionals</div>
         <div class="course-desc">Corporate communication, email writing, leadership presence, and workplace confidence for professionals.</div>
         <div class="course-meta">
-          <div class="course-meta-item">⏱ 4–6 Weeks</div>
-          <div class="course-meta-item">📍 Online & Offline</div>
+          <div class="course-meta-item">Duration: 4–6 Weeks</div>
+          <div class="course-meta-item">Mode: Online &amp; Offline</div>
           <div class="course-badge">Corporate</div>
         </div>
         <a href="#contact" class="course-cta">Enquire Now</a>
@@ -625,11 +706,11 @@
 
       <div class="course-card">
         <div class="course-icon">🌍</div>
-        <div class="course-title">PTE & TOEFL</div>
+        <div class="course-title">PTE &amp; TOEFL</div>
         <div class="course-desc">Targeted preparation for PTE Academic and TOEFL with proven strategies and mock test practice.</div>
         <div class="course-meta">
-          <div class="course-meta-item">⏱ 6–10 Weeks</div>
-          <div class="course-meta-item">📍 Online & Offline</div>
+          <div class="course-meta-item">Duration: 6–10 Weeks</div>
+          <div class="course-meta-item">Mode: Online &amp; Offline</div>
           <div class="course-badge">Expert Guided</div>
         </div>
         <a href="#contact" class="course-cta">Enquire Now</a>
@@ -646,14 +727,87 @@
     <div class="divider"></div>
     <h2 class="section-title" style="color:var(--white);">Real Results, <span style="color:var(--gold-light);">Real Students</span></h2>
     <p class="section-sub">Our students consistently achieve band scores of 6.5 to 8.0 in IELTS. Here are some of our proud achievers.</p>
-    <img src="1623243502763.jpeg" alt="Sky High Institute student results after lockdown – IELTS scores" class="results-img" />
+    <img src="1623243502763.jpeg" alt="Sky High Institute student results – IELTS scores" class="results-img" />
+  </div>
+</section>
+
+<!-- FOREIGN TRIPS -->
+<section id="foreign-trips" class="foreign-trips">
+  <div class="section-inner">
+    <div class="section-label">International Exposure</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Foreign University <span>Seminars</span></h2>
+    <p class="section-sub">Sky High Institute takes pride in its international reach. Jaskiran Kaur has participated in prestigious public speaking seminars at top Canadian universities, bringing world-class communication insights back to every student.</p>
+
+    <div class="trips-grid">
+
+      <!-- University of Toronto -->
+      <div class="trip-card">
+        <div class="trip-card-header">
+          <span class="trip-flag">🍁</span>
+          <div class="trip-university">University of Toronto</div>
+          <div class="trip-location">Toronto, Ontario, Canada</div>
+        </div>
+        <div class="trip-card-body">
+          <span class="trip-purpose-tag">Public Speaking Seminar</span>
+          <p class="trip-desc">
+            Jaskiran Kaur attended a distinguished public speaking seminar hosted at the University of Toronto — one of the world's top-ranked research universities. The seminar brought together educators, communication professionals, and academic experts to explore advanced techniques in persuasion, audience engagement, and rhetorical excellence.
+          </p>
+          <ul class="trip-highlights">
+            <li>Workshops on persuasive speaking and argumentative structure in academic contexts</li>
+            <li>Sessions on voice modulation, pacing, and audience psychology</li>
+            <li>Panel discussions with international communication coaches and university faculty</li>
+            <li>Insights into how Canadian universities train students for global professional communication</li>
+            <li>Networking with educators and trainers from across North America and South Asia</li>
+          </ul>
+          <div class="trip-cta-bar">
+            <span class="trip-cta-label">Learn public speaking techniques inspired by this experience</span>
+            <a href="#contact" class="trip-cta-btn">Enquire Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- University of British Columbia -->
+      <div class="trip-card">
+        <div class="trip-card-header">
+          <span class="trip-flag">🍁</span>
+          <div class="trip-university">University of British Columbia</div>
+          <div class="trip-location">Vancouver, British Columbia, Canada</div>
+        </div>
+        <div class="trip-card-body">
+          <span class="trip-purpose-tag">Public Speaking Seminar</span>
+          <p class="trip-desc">
+            At the University of British Columbia — consistently ranked among the top 40 universities globally — Jaskiran Kaur participated in a comprehensive public speaking and communication excellence seminar. UBC's diverse, multicultural campus provided an ideal setting to explore cross-cultural communication and effective English delivery for international audiences.
+          </p>
+          <ul class="trip-highlights">
+            <li>Advanced training in structured speech delivery and impromptu speaking techniques</li>
+            <li>Cross-cultural communication strategies for South Asian students preparing to study abroad</li>
+            <li>Practical sessions on reducing mother-tongue influence and building accent clarity</li>
+            <li>Exposure to the academic communication standards expected at top Canadian universities</li>
+            <li>Workshops on confidence building for non-native English speakers in professional settings</li>
+          </ul>
+          <div class="trip-cta-bar">
+            <span class="trip-cta-label">Train with a coach who brings global exposure to every class</span>
+            <a href="#contact" class="trip-cta-btn">Enquire Now</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="trips-note">
+      <span class="trips-note-icon">🎓</span>
+      <div class="trips-note-text">
+        The knowledge and techniques gained through these international seminars are woven directly into Sky High Institute's curriculum. When you train with us, you benefit from <strong>globally informed coaching</strong> — the same communication frameworks used at world-class Canadian universities, adapted for students and professionals in Punjab and across India.
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- AWARDS -->
 <section id="awards" class="awards">
   <div class="section-inner">
-    <div class="section-label">Recognition & Awards</div>
+    <div class="section-label">Recognition &amp; Awards</div>
     <div class="divider"></div>
     <h2 class="section-title">Nationally <span>Recognized</span> Excellence</h2>
     <p class="section-sub">Sky High Institute has been recognized by IDP IELTS for outstanding contribution and excellence performance across multiple years.</p>
@@ -794,67 +948,119 @@
   <div class="section-inner">
     <div class="section-label">Free Resources</div>
     <div class="divider"></div>
-    <h2 class="section-title">Tips & <span>Insights</span></h2>
-    <p class="section-sub">Expert articles to help you grow your English skills and communication confidence — completely free.</p>
+    <h2 class="section-title">Tips &amp; <span>Insights</span></h2>
+    <p class="section-sub">Expert articles to help you grow your English skills and communication confidence — completely free. Click any article to read the full post.</p>
     <div class="blog-grid">
 
-      <div class="blog-card">
+      <div class="blog-card" onclick="toggleBlog(this)">
         <div class="blog-img">💬</div>
         <div class="blog-body">
           <span class="blog-tag">Speaking Tips</span>
           <div class="blog-title">How to Speak Confidently in English Every Day</div>
           <div class="blog-excerpt">Simple daily habits that will transform your spoken English fluency in just 30 days without expensive classes.</div>
-          <a href="#" class="blog-link">Read More →</a>
+          <div class="blog-full">
+            <p>Speaking confidently in English is less about perfection and more about consistent practice. The biggest mistake most learners make is waiting until they feel "ready" — but fluency is built in the doing, not the preparing.</p>
+            <p><strong>Start with a daily 10-minute speaking practice.</strong> Each morning, pick a topic — your plans for the day, a news story, anything — and speak about it aloud for 10 minutes without stopping. Don't worry about grammar errors. The goal is momentum.</p>
+            <p><strong>Think in English, not translate.</strong> When you form a sentence in your mother tongue and then translate it, your speech becomes slow and unnatural. Begin labelling objects around you in English, narrating your actions mentally — "I am making tea. I will add two spoons of sugar." This rewires how your brain reaches for language.</p>
+            <p><strong>Listen actively every day.</strong> Watch English news, podcasts, or YouTube in English for at least 20 minutes daily. Don't just hear it — imitate the rhythm, stress patterns, and pauses of native speakers. This is how actors learn accents and how you can train your mouth to move differently.</p>
+            <p><strong>Record yourself.</strong> It feels uncomfortable at first, but recording yourself speaking and playing it back reveals things you can never catch in the moment — filler words, rushed sentences, or pronunciation habits you weren't aware of.</p>
+            <p>Confidence in English is a skill, not a talent. It is built the same way you build any skill — with patient, consistent repetition. At Sky High Institute, we give students a structured environment to practise without fear of judgment, and the results speak for themselves.</p>
+          </div>
+          <button class="blog-link">Read More →</button>
         </div>
       </div>
 
-      <div class="blog-card">
+      <div class="blog-card" onclick="toggleBlog(this)">
         <div class="blog-img">🎙️</div>
         <div class="blog-body">
           <span class="blog-tag">Interview Prep</span>
           <div class="blog-title">10 Interview Questions You Must Prepare For</div>
           <div class="blog-excerpt">From visa interviews to corporate placements — these are the questions every candidate must have strong answers for.</div>
-          <a href="#" class="blog-link">Read More →</a>
+          <div class="blog-full">
+            <p>Whether you are sitting for a job interview at an MNC, a visa interview for Canada or the UK, or a university admission interview abroad, there is a core set of questions that almost always come up. Your answers to these questions reveal not just your knowledge, but your confidence, clarity, and character.</p>
+            <p><strong>1. Tell me about yourself.</strong> This is not an invitation to recite your resume. Prepare a 60–90 second narrative that covers who you are professionally, what you have accomplished, and what you are looking for. Practice it until it sounds natural, not rehearsed.</p>
+            <p><strong>2. Why do you want this role / visa / course?</strong> Vague answers like "I want to grow" fail immediately. Be specific. Research the company, university, or country and connect their values to your genuine goals.</p>
+            <p><strong>3. What are your strengths?</strong> Choose two or three real strengths and back each one with a brief example. Saying "I am a hard worker" without evidence is meaningless.</p>
+            <p><strong>4. What is your greatest weakness?</strong> Be honest but strategic. Choose a real weakness that you have actively worked to improve — this shows self-awareness and initiative.</p>
+            <p><strong>5. Where do you see yourself in five years?</strong> Interviewers want to know that you have direction and that this role fits into a coherent plan. Show ambition that is realistic and relevant.</p>
+            <p>Other essential questions include: "Describe a challenge you faced and how you overcame it," "Why should we choose you?", "How do you handle pressure?", "Tell me about a time you worked in a team," and "Do you have any questions for us?" Always have a thoughtful question ready for that last one — it signals genuine interest.</p>
+            <p>At Sky High Institute, we run dedicated mock interview sessions where students answer these questions under realistic conditions and receive direct feedback on their content, tone, and body language.</p>
+          </div>
+          <button class="blog-link">Read More →</button>
         </div>
       </div>
 
-      <div class="blog-card">
+      <div class="blog-card" onclick="toggleBlog(this)">
         <div class="blog-img">🧠</div>
         <div class="blog-body">
           <span class="blog-tag">Body Language</span>
           <div class="blog-title">Body Language Secrets for Better Communication</div>
           <div class="blog-excerpt">Over 55% of communication is non-verbal. Learn how posture, eye contact, and gestures shape how others perceive you.</div>
-          <a href="#" class="blog-link">Read More →</a>
+          <div class="blog-full">
+            <p>Albert Mehrabian's research established that in emotional communication, 55% of the message is conveyed through body language, 38% through tone of voice, and only 7% through words. This means that even with perfect grammar, poor body language can completely undermine what you are trying to say.</p>
+            <p><strong>Posture is your first signal.</strong> Before you say a single word, your posture has already told the room whether you feel confident or uncertain. Stand or sit with your back straight, shoulders relaxed but open, and your weight evenly balanced. Slouching signals disinterest; leaning forward slightly signals engagement.</p>
+            <p><strong>Eye contact builds trust.</strong> Maintaining comfortable eye contact — not a fixed stare, but natural, consistent contact — communicates honesty, confidence, and respect. In a group setting, sweep your gaze across different audience members so everyone feels included. In a one-on-one conversation, hold eye contact for 3–5 seconds at a time before a natural glance away.</p>
+            <p><strong>Gestures add power to your words.</strong> Natural hand gestures help emphasise key points and keep listeners engaged. Avoid crossing your arms (signals defensiveness), pointing fingers at the audience (aggressive), or excessive fidgeting (signals anxiety). Open, palm-upward gestures communicate honesty and openness.</p>
+            <p><strong>Facial expressions must match your message.</strong> Smiling at the right moments, showing genuine concern when appropriate, and keeping an animated (not exaggerated) face makes you far more compelling to listen to than someone with a flat, expressionless delivery.</p>
+            <p><strong>Use space deliberately.</strong> Moving purposefully within a space — such as stepping toward the audience when making an important point — creates connection and commands attention. Being frozen in one spot throughout a speech is a missed opportunity.</p>
+            <p>Our Personality Development and Public Speaking courses at Sky High Institute dedicate entire sessions to body language training, including video feedback so students can see themselves the way others do.</p>
+          </div>
+          <button class="blog-link">Read More →</button>
         </div>
       </div>
 
-      <div class="blog-card">
+      <div class="blog-card" onclick="toggleBlog(this)">
         <div class="blog-img">📚</div>
         <div class="blog-body">
           <span class="blog-tag">IELTS</span>
           <div class="blog-title">Top 5 Mistakes in IELTS Writing Task 2</div>
           <div class="blog-excerpt">These common errors cost students valuable marks. Avoid them and watch your band score jump by 0.5 to 1 full band.</div>
-          <a href="#" class="blog-link">Read More →</a>
+          <div class="blog-full">
+            <p>IELTS Writing Task 2 is an essay question that carries significant weight in your overall Writing band score. Yet it is also the section where most candidates consistently lose marks — not because they lack ideas, but because of a predictable set of structural and language mistakes.</p>
+            <p><strong>Mistake 1: Not answering the question directly.</strong> Many students write a generic essay about the topic rather than specifically addressing the question asked. If the question asks you to "discuss both views and give your own opinion," you must present both views and state your position clearly. Not doing so drops your Task Achievement score immediately.</p>
+            <p><strong>Mistake 2: Writing less than 250 words.</strong> This is a hard minimum. Essays under 250 words are penalised directly. Aim for 260–290 words — enough to be thorough without risking rushed, underdeveloped paragraphs.</p>
+            <p><strong>Mistake 3: Weak paragraph structure.</strong> Each body paragraph should follow a clear pattern: Topic Sentence → Explanation → Example → Link back to the question. Many students write long, unstructured paragraphs that confuse examiners. Clarity and organisation are scored directly under Coherence and Cohesion.</p>
+            <p><strong>Mistake 4: Repetitive vocabulary.</strong> Using the same words repeatedly signals a limited range to the examiner. Practise using synonyms and varied sentence structures. Lexical Resource is one of the four scoring criteria and accounts for 25% of your Writing score.</p>
+            <p><strong>Mistake 5: Grammar errors in every sentence.</strong> Perfect grammar is not required, but consistent errors in basic tenses, subject-verb agreement, or article usage (a/an/the) drag your Grammatical Range and Accuracy score down. Focus on writing correctly at a moderate complexity level rather than attempting overly complex sentences that fall apart.</p>
+            <p>In our IELTS preparation batches at Sky High Institute, we review and correct Task 2 essays individually, so students understand exactly where marks are being lost — and how to recover them.</p>
+          </div>
+          <button class="blog-link">Read More →</button>
         </div>
       </div>
 
-      <div class="blog-card">
+      <div class="blog-card" onclick="toggleBlog(this)">
         <div class="blog-img">🔤</div>
         <div class="blog-body">
           <span class="blog-tag">Grammar</span>
           <div class="blog-title">Common Grammar Mistakes Indians Make in English</div>
           <div class="blog-excerpt">From "do the needful" to "I am having a doubt" — these Hindi-influenced patterns are holding your English back.</div>
-          <a href="#" class="blog-link">Read More →</a>
+          <div class="blog-full">
+            <p>Indian English is rich and expressive, but it carries certain grammatical patterns inherited from Hindi, Punjabi, and other regional languages that sound unnatural to native English speakers — and can cost you marks in IELTS, PTE, or a professional setting. Identifying these patterns is the first step to correcting them.</p>
+            <p><strong>Overuse of "itself."</strong> Phrases like "Mumbai itself is a great city" or "he himself completed the work" are used far more frequently in Indian English than in British or American English, often where no emphasis is needed. Use reflexive pronouns only when genuine emphasis is required.</p>
+            <p><strong>Missing or incorrect articles.</strong> Choosing between "a," "an," and "the" — or knowing when no article is needed — is one of the most difficult areas for Hindi speakers because Hindi has no equivalent system. "I went to market" should be "I went to the market." Practising articles with specific exercises is the fastest way to improve.</p>
+            <p><strong>Incorrect use of since and for.</strong> "Since" is used with a point in time ("since 2019"), while "for" is used with a duration ("for five years"). Mixing them — "I have been working here since five years" — is one of the most common IELTS grammar errors.</p>
+            <p>In our Spoken English and Communication Skills courses, we spend dedicated time on these patterns, giving students a clear understanding of where their English has been shaped by regional language habits — and the tools to correct it naturally.</p>
+          </div>
+          <button class="blog-link">Read More →</button>
         </div>
       </div>
 
-      <div class="blog-card">
+      <div class="blog-card" onclick="toggleBlog(this)">
         <div class="blog-img">🌟</div>
         <div class="blog-body">
           <span class="blog-tag">Motivation</span>
           <div class="blog-title">Why Every Student Needs Communication Skills Training</div>
           <div class="blog-excerpt">In a competitive world, what you know matters less than how you express it. Here's why communication is your greatest asset.</div>
-          <a href="#" class="blog-link">Read More →</a>
+          <div class="blog-full">
+            <p>There is a quiet assumption in how most students are educated: that knowledge is the destination. Study hard, score well, earn a degree. But the students who thrive in interviews, workplaces, universities abroad, and professional life are rarely simply the most knowledgeable. They are the most communicative.</p>
+            <p><strong>Knowledge without expression is invisible.</strong> If you cannot clearly articulate what you know — in an interview, a presentation, a group discussion, or a conversation with a potential employer — your knowledge may as well not exist in that moment. Communication is not a "soft skill." It is the carrier signal for every other skill you have.</p>
+            <p><strong>The gap is widening.</strong> As more students pursue higher education and professional qualifications, degrees alone distinguish fewer and fewer candidates. Employers and universities — particularly in Canada, the UK, and Australia — are increasingly evaluating communication ability, critical thinking, and interpersonal confidence alongside academic scores.</p>
+            <p><strong>Communication affects your earning potential directly.</strong> Research consistently shows that professionals with strong communication skills earn more, advance faster, and are more frequently considered for leadership roles. This is true across industries — from healthcare and technology to education and business.</p>
+            <p><strong>Stage fear is a learned barrier, not a permanent condition.</strong> Most people who avoid public speaking are not naturally shy — they have simply never been taught to speak in front of others in a structured, supportive environment. With the right training, stage fear becomes manageable for virtually everyone.</p>
+            <p><strong>For students going abroad, communication is survival.</strong> Navigating a new country, a new university, a new workplace — all of this demands the ability to communicate with clarity and confidence in English. Students who arrive in Canada or Australia with strong communication skills adapt faster, integrate better, and perform better academically and professionally.</p>
+            <p>At Sky High Institute, we believe communication training is not optional — it is foundational. Whether your goal is an IELTS score, a visa interview, a job placement, or simply greater confidence in daily life, the ability to express yourself clearly and confidently changes everything.</p>
+          </div>
+          <button class="blog-link">Read More →</button>
         </div>
       </div>
 
@@ -876,7 +1082,7 @@
           <div class="contact-item">
             <div class="contact-item-icon">📞</div>
             <div>
-              <div class="contact-item-label">Phone & WhatsApp</div>
+              <div class="contact-item-label">Phone &amp; WhatsApp</div>
               <div class="contact-item-val">+91 92178 50756</div>
             </div>
           </div>
@@ -912,24 +1118,24 @@
         <div class="form-row">
           <div class="form-group">
             <label>First Name</label>
-            <input type="text" placeholder="Your first name" />
+            <input id="f-first" type="text" placeholder="Your first name" />
           </div>
           <div class="form-group">
             <label>Last Name</label>
-            <input type="text" placeholder="Your last name" />
+            <input id="f-last" type="text" placeholder="Your last name" />
           </div>
         </div>
         <div class="form-group">
           <label>Phone Number</label>
-          <input type="tel" placeholder="+91 XXXXX XXXXX" />
+          <input id="f-phone" type="tel" placeholder="+91 XXXXX XXXXX" />
         </div>
         <div class="form-group">
           <label>Email Address</label>
-          <input type="email" placeholder="your@email.com" />
+          <input id="f-email" type="email" placeholder="your@email.com" />
         </div>
         <div class="form-group">
           <label>Course of Interest</label>
-          <select>
+          <select id="f-course">
             <option value="">Select a course...</option>
             <option>Spoken English</option>
             <option>Communication Skills</option>
@@ -944,7 +1150,7 @@
         </div>
         <div class="form-group">
           <label>Preferred Mode</label>
-          <select>
+          <select id="f-mode">
             <option value="">Online or Offline?</option>
             <option>Online</option>
             <option>Offline (Morinda Branch)</option>
@@ -953,10 +1159,10 @@
         </div>
         <div class="form-group">
           <label>Message (Optional)</label>
-          <textarea placeholder="Tell us about your goals or any questions..."></textarea>
+          <textarea id="f-message" placeholder="Tell us about your goals or any questions..."></textarea>
         </div>
-        <button class="form-submit" onclick="alert('Thank you! We will contact you within 24 hours. You can also WhatsApp us at +91 92178 50756')">
-          🎯 Submit & Book My Demo Class
+        <button class="form-submit" onclick="submitToWhatsApp()">
+          Submit &amp; Book My Demo Class
         </button>
       </div>
     </div>
@@ -968,8 +1174,8 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">Sky <span>High</span> Institute</div>
-      <div class="footer-desc">A leading hub for IELTS, PTE, TOEFL, Spoken English, and Communication Skills training in Punjab, India. Recognized by IDP & British Council. Empowering 7000+ students to aim sky high.</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.4);">📞 +91 92178 50756 &nbsp;|&nbsp; ✉️ skyhighinsitiute0@gmail.com</div>
+      <div class="footer-desc">A leading hub for IELTS, PTE, TOEFL, Spoken English, and Communication Skills training in Punjab, India. Recognized by IDP &amp; British Council. Empowering 7000+ students to aim sky high.</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.4);">+91 92178 50756 &nbsp;|&nbsp; skyhighinsitiute0@gmail.com</div>
     </div>
     <div>
       <div class="footer-heading">Quick Links</div>
@@ -977,7 +1183,8 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About Jaskiran Kaur</a></li>
         <li><a href="#courses">All Courses</a></li>
-        <li><a href="#awards">Awards & Recognition</a></li>
+        <li><a href="#foreign-trips">Foreign Seminars</a></li>
+        <li><a href="#awards">Awards &amp; Recognition</a></li>
         <li><a href="#testimonials">Student Reviews</a></li>
         <li><a href="#blog">Free Resources</a></li>
         <li><a href="#contact">Contact Us</a></li>
@@ -988,7 +1195,7 @@
       <ul class="footer-links">
         <li><a href="#courses">Spoken English</a></li>
         <li><a href="#courses">IELTS Preparation</a></li>
-        <li><a href="#courses">PTE & TOEFL</a></li>
+        <li><a href="#courses">PTE &amp; TOEFL</a></li>
         <li><a href="#courses">Interview Preparation</a></li>
         <li><a href="#courses">Public Speaking</a></li>
         <li><a href="#courses">Personality Development</a></li>
@@ -998,9 +1205,52 @@
   </div>
   <div class="footer-bottom">
     <div style="color:rgba(255,255,255,0.4);">© 2024 Sky High Institute. All rights reserved. | Punjab, India</div>
-    <div style="color:rgba(255,255,255,0.4);">Designed with ❤️ for Jaskiran Kaur</div>
+    <div style="color:rgba(255,255,255,0.4);">Designed for Jaskiran Kaur</div>
   </div>
 </footer>
+
+<script>
+function toggleBlog(card) {
+  const isExpanded = card.classList.contains('expanded');
+  const btn = card.querySelector('.blog-link');
+  if (isExpanded) {
+    card.classList.remove('expanded');
+    btn.textContent = 'Read More →';
+  } else {
+    card.classList.add('expanded');
+    btn.textContent = 'Show Less ↑';
+  }
+}
+
+function submitToWhatsApp() {
+  const first   = document.getElementById('f-first').value.trim();
+  const last    = document.getElementById('f-last').value.trim();
+  const phone   = document.getElementById('f-phone').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const course  = document.getElementById('f-course').value;
+  const mode    = document.getElementById('f-mode').value;
+  const message = document.getElementById('f-message').value.trim();
+
+  if (!first || !phone || !course) {
+    alert('Please fill in your First Name, Phone Number, and Course of Interest before submitting.');
+    return;
+  }
+
+  const name = last ? first + ' ' + last : first;
+
+  let text =
+    '🙏 *New Enquiry – Sky High Institute*\n\n' +
+    '*Name:* ' + name + '\n' +
+    '*Phone:* ' + phone + '\n' +
+    (email   ? '*Email:* ' + email + '\n' : '') +
+    '*Course:* ' + course + '\n' +
+    (mode    ? '*Mode:* ' + mode + '\n' : '') +
+    (message ? '\n*Message:* ' + message : '');
+
+  const encoded = encodeURIComponent(text);
+  window.open('https://wa.me/919217850756?text=' + encoded, '_blank');
+}
+</script>
 
 </body>
 </html>
